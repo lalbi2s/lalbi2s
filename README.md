@@ -46,4 +46,3 @@ Ces projets reflètent mes compétences en **.NET**, **Angular** et **bases de d
 
 ---
 
- *“Le code clair est plus facile à maintenir qu’un code rapide mais confus.”*
