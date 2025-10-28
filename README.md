@@ -1,4 +1,4 @@
-#  Salut, moi c'est Bilal Saidi
+
 
  Développeur .NET Junior passionné par le développement back-end et front-end.  
  J’aime concevoir des solutions robustes, maintenables et évolutives, en appliquant les bonnes pratiques de développement.  
