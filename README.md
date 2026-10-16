@@ -15,12 +15,11 @@ Looking for a junior developer role, ideally in an R&D team, in back-end develop
 - [agent-controller](https://github.com/lalbi2s/agent-controller): web app that chains LLM agents (extractor, architect, reviewer) to generate Grafana dashboards from k6 performance tests, with code-based validation, an automatic correction loop and several LLM providers. C# / .NET, React, TypeScript.
 - [fault-injection-runner](https://github.com/lalbi2s/fault-injection-runner): command-line test bench that injects faults into a simulated flight and checks the switch to safe mode. Python, pytest.
 - [payload-object-storage](https://github.com/lalbi2s/payload-object-storage): service that stores satellite images and calibration files in S3-compatible storage, with metadata and temporary download links. FastAPI, boto3, Docker.
+-  [satellite-telemetry-service](https://github.com/lalbi2s/satellite-telemetry-service) — FastAPI service that ingests satellite telemetry, validates it and flags anomalies (NOMINAL / CRITICAL), with PostgreSQL, Alembic migrations and Docker.
 
 ## Currently working on
 
 - [odoo-haccp](https://github.com/lalbi2s/odoo-haccp): Odoo module for food safety, tracking fridge and freezer temperatures and non-compliant readings. Python, Odoo ORM, XML views.
-- [satellite-telemetry-service](https://github.com/lalbi2s/satellite-telemetry-service): REST API that ingests satellite sensor data and flags anomalies. FastAPI, SQLAlchemy, pytest.
-
 ## Experience
 
 **Developer intern, System QA team, EVS** (Liège, February to April 2026)
