@@ -3,7 +3,7 @@
 Junior developer working with C# / .NET and Python, based in Liège, Belgium.
 I build back-end services, business applications and the tests that keep them reliable.
 
-Looking for a junior developer role, ideally in an R&D team, in back-end development (.NET or Python), test automation or AI-powered applications. Based in Belgium, open to Luxembourg.
+Looking for a junior developer role, ideally in an R&D team, in back-end development (.NET or Python), test automation or AI-powered applications. Open to Belgium and Luxembourg.
 
 <p>
   <a href="mailto:bilalsaidi-96@hotmail.com"><img src="https://img.shields.io/badge/Email-Contact%20me-D14836?style=for-the-badge" alt="Email" /></a>
@@ -12,6 +12,7 @@ Looking for a junior developer role, ideally in an R&D team, in back-end develop
 
 ## Featured projects
 
+- [agent-controller](https://github.com/lalbi2s/agent-controller): web app that chains LLM agents (extractor, architect, reviewer) to generate Grafana dashboards from k6 performance tests, with code-based validation, an automatic correction loop and several LLM providers. C# / .NET, React, TypeScript.
 - [fault-injection-runner](https://github.com/lalbi2s/fault-injection-runner): command-line test bench that injects faults into a simulated flight and checks the switch to safe mode. Python, pytest.
 - [payload-object-storage](https://github.com/lalbi2s/payload-object-storage): service that stores satellite images and calibration files in S3-compatible storage, with metadata and temporary download links. FastAPI, boto3, Docker.
 
@@ -33,7 +34,7 @@ Looking for a junior developer role, ideally in an R&D team, in back-end develop
 - **Back-end:** C#, .NET, ASP.NET, Entity Framework, Blazor, Web API, Python, FastAPI, Odoo
 - **Front-end:** JavaScript, TypeScript, React, Angular, HTML, CSS
 - **Databases:** SQL Server, PostgreSQL, SQLite
-- **Testing:** k6, pytest, Grafana, Jira / Xray
+- **Testing:** k6, pytest, xUnit, Grafana, Jira / Xray
 - **Tools:** Git, GitHub, Docker, Azure, Agile / Scrum
 
 ## Currently preparing
