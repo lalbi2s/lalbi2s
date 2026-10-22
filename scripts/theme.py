@@ -6,12 +6,7 @@ light file differ by nothing but the values defined here.
 
 FONT_STACK = 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'
 
-# Portrait and card are stacked and share one narrow width (px), so the text
-# stays readable once GitHub scales them down on a phone.
-PORTRAIT_W = 500
-PORTRAIT_H = 528
-CARD_W = 500
-# The contribution graph needs 53 weeks of cells, so it is wider.
+# Width shared by the header and the contribution graph (px).
 TOTAL_W = 880
 RADIUS = 8
 

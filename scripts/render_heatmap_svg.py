@@ -1,15 +1,14 @@
 """Render the contribution heatmap from data/contributions.json.
 
 Writes assets/contrib-dark.svg and assets/contrib-light.svg: 53 weeks x 7
-days of rounded cells and a Less -> More legend. The cells appear once along
-the diagonal. The stats go in their own narrow card, assets/stats-dark.svg
-and assets/stats-light.svg.
+days of rounded cells, a Less -> More legend and one line with the total.
+The cells appear once along the diagonal.
 """
 import json
 from datetime import date
 from pathlib import Path
 
-from theme import (CARD_W, FONT_STACK, RADIUS, REDUCED_MOTION_CSS, TOTAL_W,
+from theme import (FONT_STACK, RADIUS, REDUCED_MOTION_CSS, TOTAL_W,
                    heat_tokens, root_css)
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -34,21 +33,9 @@ LEGEND_Y = GRID_Y + GRID_H + 28
 HEIGHT = LEGEND_Y + CELL + 20
 
 LABEL_SIZE = 12
-STATS_SIZE = 16
-STATS_PAD = 20
-STATS_KEY_COLS = 9  # longest key ("Best day") plus one space
-STATS_PITCH = 28
+TOTAL_SIZE = 16
 CELL_DELAY_MS = 30  # (52 + 6) * 30 + 200 = 1.94 s in total
 CELL_DURATION_MS = 200
-
-
-def plural(n: int, word: str) -> str:
-    return f"{n} {word}" + ("" if n == 1 else "s")
-
-
-def short_date(iso: str) -> str:
-    d = date.fromisoformat(iso)
-    return f"{d:%b} {d.day}"
 
 
 def month_labels(first: date) -> list[tuple[int, str]]:
@@ -109,6 +96,11 @@ def build_svg(data: dict, variant: str) -> str:
         + f'<text x="{more_x:g}" y="{LEGEND_Y + CELL - 2}">More</text></g>'
     )
 
+    total = (
+        f'<text class="total" x="{GRID_X}" y="{LEGEND_Y + CELL - 0.5}">'
+        f'<tspan class="num">{data["total"]}</tspan> contributions in the last year</text>'
+    )
+
     heat_css = "".join(f".l{i}{{fill:var(--heat-{i})}}" for i in range(5))
     css = (
         root_css(variant, heat_tokens(variant))
@@ -117,6 +109,8 @@ def build_svg(data: dict, variant: str) -> str:
         + heat_css
         + f".labels{{font-size:{LABEL_SIZE}px;fill:var(--text-muted)}}"
         + ".muted{fill:var(--text-muted)}"
+        + f".total{{font-size:{TOTAL_SIZE}px;fill:var(--text)}}"
+        + ".num{fill:var(--accent);font-weight:700}"
         + ".cell{transform-box:fill-box;transform-origin:center;"
         + f"animation:pop {CELL_DURATION_MS}ms ease-out both;"
         + f"animation-delay:calc(var(--d) * {CELL_DELAY_MS}ms)}}"
@@ -124,7 +118,7 @@ def build_svg(data: dict, variant: str) -> str:
         + REDUCED_MOTION_CSS
     )
 
-    label = f'Contribution graph of the last 12 months: {data["total"]} contributions'
+    label = f'Contribution graph: {data["total"]} contributions in the last year'
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" '
         f'viewBox="0 0 {WIDTH} {HEIGHT}" role="img" aria-label="{label}">\n'
@@ -134,44 +128,7 @@ def build_svg(data: dict, variant: str) -> str:
         f'height="{HEIGHT - 1}" rx="{RADIUS}"/>\n'
         f'<g class="labels">{months}{weekdays}</g>\n'
         + "\n".join(cells)
-        + f"\n{legend}\n</svg>\n"
-    )
-
-
-def stats_rows(data: dict) -> list[tuple[str, str]]:
-    best = data["best_day"]
-    return [
-        ("Total", f'{data["total"]} in the last 12 months'),
-        ("Streak", plural(data["current_streak"], "day")),
-        ("Longest", plural(data["longest_streak"], "day")),
-        ("Best day", f'{best["count"]} on {short_date(best["date"])}'),
-    ]
-
-
-def build_stats_svg(data: dict, variant: str) -> str:
-    """Stats card: same look as the profile card, narrow enough for a phone."""
-    rows = stats_rows(data)
-    value_x = STATS_PAD + STATS_KEY_COLS * STATS_SIZE * 0.6
-    height = 2 * STATS_PAD + (len(rows) - 1) * STATS_PITCH + 12
-    lines = "".join(
-        f'<text class="key" x="{STATS_PAD}" y="{STATS_PAD + 14 + i * STATS_PITCH}">{key}</text>'
-        f'<text class="value" x="{value_x:g}" y="{STATS_PAD + 14 + i * STATS_PITCH}">{value}</text>'
-        for i, (key, value) in enumerate(rows)
-    )
-    css = (
-        root_css(variant)
-        + f"svg{{font-family:{FONT_STACK};font-size:{STATS_SIZE}px}}"
-        + ".panel{fill:var(--surface);stroke:var(--border)}"
-        + ".key{fill:var(--accent);font-weight:700}.value{fill:var(--text)}"
-    )
-    label = "Contribution stats: " + ", ".join(f"{k} {v}" for k, v in rows)
-    return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{CARD_W}" height="{height}" '
-        f'viewBox="0 0 {CARD_W} {height}" role="img" aria-label="{label}">\n'
-        f"<title>Contribution stats</title>\n"
-        f"<style>{css}</style>\n"
-        f'<rect class="panel" x="0.5" y="0.5" width="{CARD_W - 1}" '
-        f'height="{height - 1}" rx="{RADIUS}"/>\n{lines}\n</svg>\n'
+        + f"\n{legend}\n{total}\n</svg>\n"
     )
 
 
@@ -179,11 +136,9 @@ def main() -> None:
     data = json.loads(DATA.read_text(encoding="utf-8"))
     ASSETS.mkdir(exist_ok=True)
     for variant in ("dark", "light"):
-        for name, svg in (("contrib", build_svg(data, variant)),
-                          ("stats", build_stats_svg(data, variant))):
-            out = ASSETS / f"{name}-{variant}.svg"
-            out.write_text(svg, encoding="utf-8")
-            print(f"wrote {out.relative_to(ROOT)} ({out.stat().st_size // 1024} KB)")
+        out = ASSETS / f"contrib-{variant}.svg"
+        out.write_text(build_svg(data, variant), encoding="utf-8")
+        print(f"wrote {out.relative_to(ROOT)} ({out.stat().st_size // 1024} KB)")
 
 
 if __name__ == "__main__":

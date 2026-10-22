@@ -1,8 +1,6 @@
-"""Turn source-prepped.png into animated ASCII portraits.
+"""Turn source-prepped.png into ASCII rows and SVG markup for them.
 
-Writes assets/portrait-dark.svg and assets/portrait-light.svg. One text
-color, no per-character color. Each row is written from left to right, from
-top to bottom, once; then the portrait stays still.
+Used by make_profile_svg.py. One text color, no per-character color.
 """
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -10,12 +8,8 @@ from xml.sax.saxutils import escape
 import cv2
 import numpy as np
 
-from theme import (FONT_STACK, PORTRAIT_H, PORTRAIT_W, RADIUS,
-                   REDUCED_MOTION_CSS, root_css)
-
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "source-prepped.png"
-ASSETS = ROOT / "assets"
 
 COLS, ROWS = 100, 53
 RAMP = " .`:-=+*cs#%@"  # light to dark, the space is the background
@@ -23,10 +17,7 @@ GAMMA = 1.5  # above 1 keeps mid tones light so only real shadows get dense glyp
 POSITIVE_GAMMA = 1.2
 LOW_PCT, HIGH_PCT = 2, 98  # tone range stretched over the whole ramp
 
-PAD = 12
 CHAR_RATIO = 0.6  # monospace advance width / font size
-ROW_DELAY_MS = 32.5  # 52 * 32.5 + 250 = 1.94 s in total
-ROW_DURATION_MS = 250
 
 
 def background_mask(gray) -> "np.ndarray":
@@ -91,63 +82,41 @@ def positive_rows(small, bg) -> list[str]:
     return rows
 
 
-def build_svg(rows: list[str], variant: str) -> str:
-    cw = (PORTRAIT_W - 2 * PAD) / COLS
-    lh = (PORTRAIT_H - 2 * PAD) / ROWS
-    font_size = cw / CHAR_RATIO
+def cell_size(width: float, height: float) -> tuple[float, float, float]:
+    """Character cell (width, height) and font size for a grid fitted in a box."""
+    cw = width / COLS
+    lh = height / ROWS
+    return cw, lh, cw / CHAR_RATIO
 
+
+def rows_markup(rows: list[str], x0: float, y0: float, width: float, height: float) -> str:
+    """SVG for the portrait rows, written left to right, top to bottom.
+
+    Each row is a <text> with a cover rectangle (class "cover", filled by the
+    stylesheet with the window color) that a CSS animation shrinks to the
+    right. The delay of a row comes from its --i custom property.
+    """
+    cw, lh, _ = cell_size(width, height)
     parts = []
     for i, row in enumerate(rows):
         text = row.strip(" ")
         if not text:
             continue
         lead = len(row) - len(row.lstrip(" "))
-        x = PAD + lead * cw
-        y = PAD + i * lh
-        width = len(text) * cw
+        x = x0 + lead * cw
+        y = y0 + i * lh
+        text_w = len(text) * cw
         parts.append(
-            f'<g class="row" style="--i:{i}">'
-            f'<text x="{x:.2f}" y="{y + lh * 0.8:.2f}" textLength="{width:.2f}" '
+            f'<g style="--i:{i}">'
+            f'<text x="{x:.2f}" y="{y + lh * 0.8:.2f}" textLength="{text_w:.2f}" '
             f'lengthAdjust="spacing" xml:space="preserve">{escape(text)}</text>'
             f'<rect class="cover" x="{x - 1:.2f}" y="{y:.2f}" '
-            f'width="{width + 2:.2f}" height="{lh:.2f}"/></g>'
+            f'width="{text_w + 2:.2f}" height="{lh:.2f}"/></g>'
         )
-
-    css = (
-        root_css(variant)
-        + f"svg{{font-family:{FONT_STACK}}}"
-        + ".panel{fill:var(--surface);stroke:var(--border)}"
-        + f".art{{font-size:{font_size:.2f}px;fill:var(--text)}}"
-        + ".cover{fill:var(--surface);transform-box:fill-box;transform-origin:right;"
-        + "transform:scaleX(0);"
-        + f"animation:write {ROW_DURATION_MS}ms linear both;"
-        + f"animation-delay:calc(var(--i) * {ROW_DELAY_MS}ms)}}"
-        + "@keyframes write{from{transform:scaleX(1)}to{transform:scaleX(0)}}"
-        + REDUCED_MOTION_CSS
-    )
-
-    return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{PORTRAIT_W}" height="{PORTRAIT_H}" '
-        f'viewBox="0 0 {PORTRAIT_W} {PORTRAIT_H}" role="img" '
-        f'aria-label="ASCII portrait of Bilal">\n'
-        f"<title>ASCII portrait of Bilal</title>\n"
-        f"<style>{css}</style>\n"
-        f'<rect class="panel" x="0.5" y="0.5" width="{PORTRAIT_W - 1}" '
-        f'height="{PORTRAIT_H - 1}" rx="{RADIUS}"/>\n'
-        f'<g class="art">\n' + "\n".join(parts) + "\n</g>\n</svg>\n"
-    )
+    return "\n".join(parts)
 
 
-def main() -> None:
-    # Light text on dark reads like the drawing when light areas are dense;
-    # dark text on light does the opposite.
-    art = {"dark": to_rows(SRC, positive=True), "light": to_rows(SRC)}
-    ASSETS.mkdir(exist_ok=True)
-    for variant, rows in art.items():
-        out = ASSETS / f"portrait-{variant}.svg"
-        out.write_text(build_svg(rows, variant), encoding="utf-8")
-        print(f"wrote {out.relative_to(ROOT)} ({out.stat().st_size // 1024} KB)")
-
-
-if __name__ == "__main__":
-    main()
+def rows_for(variant: str) -> list[str]:
+    """Light text on dark reads like the drawing when light areas are dense;
+    dark text on light does the opposite."""
+    return to_rows(SRC, positive=(variant == "dark"))
