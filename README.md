@@ -1,3 +1,21 @@
+<div align="center">
+
+<p><code>bilal@github ~ $ whoami</code></p>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/portrait-dark.svg">
+  <img src="assets/portrait-light.svg" alt="ASCII art portrait of Bilal, with a short beard, wearing a jacket and a tie" width="500">
+</picture>
+
+<br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/card-dark.svg">
+  <img src="assets/card-light.svg" alt="Profile card for bilal@lalbi2s. Role: Junior developer · C# / .NET &amp; Python. Based: Liège, Belgium · open to Belgium &amp; Luxembourg. Seeking: Junior role in an R&amp;D team: back-end, test automation, AI apps. Now: Building odoo-haccp · preparing AI-103, AI-200, ISTQB CTFL. Prev: Developer intern, System QA · EVS (Feb–Apr 2026). Stack: C# · .NET · ASP.NET · Python · FastAPI · Odoo. Data: PostgreSQL · SQL Server · SQLite. Testing: k6 · pytest · xUnit · Grafana · Jira / Xray. Tools: Git · GitHub · Docker · Azure." width="500">
+</picture>
+
+</div>
+
 # Hi, I'm Bilal
 
 Junior developer working with C# / .NET and Python, based in Liège, Belgium.
@@ -41,3 +59,21 @@ Looking for a junior developer role, ideally in an R&D team, in back-end develop
 - Microsoft Certified: Azure AI App and Agent Developer Associate (AI-103)
 - Microsoft Certified: Azure AI Cloud Developer Associate (AI-200)
 - ISTQB Certified Tester Foundation Level (CTFL)
+
+<div align="center">
+
+<p><code>bilal@github ~ $ ./contributions.sh</code></p>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/contrib-dark.svg">
+  <img src="assets/contrib-light.svg" alt="GitHub contribution graph for the last 12 months, with the total, the current streak, the longest streak and the best day" width="880">
+</picture>
+
+<br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.svg">
+  <img src="assets/stats-light.svg" alt="Contribution stats: total over the last 12 months, current streak, longest streak and best day" width="500">
+</picture>
+
+</div>

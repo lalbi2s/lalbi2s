@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="530" viewBox="0 0 500 530" role="img" aria-label="Profile card bilal@lalbi2s. Role: Junior developer · C# / .NET &amp; Python; Based: Liège, Belgium · open to Belgium &amp; Luxembourg; Seeking: Junior role in an R&amp;D team: back-end, test automation, AI apps; Now: Building odoo-haccp · preparing AI-103, AI-200, ISTQB CTFL; Prev: Developer intern, System QA · EVS (Feb–Apr 2026); Stack: C# · .NET · ASP.NET · Python · FastAPI · Odoo; Data: PostgreSQL · SQL Server · SQLite; Testing: k6 · pytest · xUnit · Grafana · Jira / Xray; Tools: Git · GitHub · Docker · Azure">
+<title>bilal@lalbi2s</title>
+<style>:root{--bg:#ffffff;--surface:#f6f8fa;--border:#d0d7de;--text:#1f2328;--text-muted:#59636e;--accent:#0969da;}svg{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;font-size:16px}.panel{fill:var(--surface);stroke:var(--border)}.title{fill:var(--accent);font-weight:700}.rule{stroke:var(--border);stroke-width:1}.key{fill:var(--accent);font-weight:700}.value{fill:var(--text)}.line{animation:in 220ms ease-out both;animation-delay:calc(var(--i) * 170ms)}@keyframes in{from{opacity:0;transform:translateX(-8px)}}@media (prefers-reduced-motion: reduce){*{animation:none !important}}</style>
+<rect class="panel" x="0.5" y="0.5" width="499" height="529" rx="8"/>
+<g class="line" style="--i:0"><text class="title" x="20" y="44">bilal@lalbi2s</text></g>
+<line class="rule" x1="20" y1="60" x2="480" y2="60"/>
+<g class="line" style="--i:1"><text class="key" x="20" y="94">Role</text><text class="value" x="106.4" y="94">Junior developer · C# / .NET &amp; Python</text></g>
+<g class="line" style="--i:2"><text class="key" x="20" y="128">Based</text><text class="value" x="106.4" y="128">Liège, Belgium · open to Belgium</text><text class="value" x="106.4" y="150">&amp; Luxembourg</text></g>
+<g class="line" style="--i:3"><text class="key" x="20" y="184">Seeking</text><text class="value" x="106.4" y="184">Junior role in an R&amp;D team: back-end,</text><text class="value" x="106.4" y="206">test automation, AI apps</text></g>
+<g class="line" style="--i:4"><text class="key" x="20" y="240">Now</text><text class="value" x="106.4" y="240">Building odoo-haccp · preparing</text><text class="value" x="106.4" y="262">AI-103, AI-200, ISTQB CTFL</text></g>
+<g class="line" style="--i:5"><text class="key" x="20" y="296">Prev</text><text class="value" x="106.4" y="296">Developer intern, System QA · EVS</text><text class="value" x="106.4" y="318">(Feb–Apr 2026)</text></g>
+<g class="line" style="--i:6"><text class="key" x="20" y="352">Stack</text><text class="value" x="106.4" y="352">C# · .NET · ASP.NET · Python ·</text><text class="value" x="106.4" y="374">FastAPI · Odoo</text></g>
+<g class="line" style="--i:7"><text class="key" x="20" y="408">Data</text><text class="value" x="106.4" y="408">PostgreSQL · SQL Server · SQLite</text></g>
+<g class="line" style="--i:8"><text class="key" x="20" y="442">Testing</text><text class="value" x="106.4" y="442">k6 · pytest · xUnit · Grafana ·</text><text class="value" x="106.4" y="464">Jira / Xray</text></g>
+<g class="line" style="--i:9"><text class="key" x="20" y="498">Tools</text><text class="value" x="106.4" y="498">Git · GitHub · Docker · Azure</text></g>
+</svg>

@@ -1,0 +1,7 @@
+.claude/
+CLAUDE.md
+source-photo.jpg
+source-prepped.png
+.venv/
+preview.html
+__pycache__/
