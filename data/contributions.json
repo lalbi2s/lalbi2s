@@ -1,8 +1,8 @@
 {
  "user": "lalbi2s",
- "from": "2025-10-19",
- "to": "2026-10-24",
- "total": 179,
+ "from": "2025-10-26",
+ "to": "2026-10-25",
+ "total": 178,
  "current_streak": 0,
  "longest_streak": 5,
  "best_day": {
@@ -10,41 +10,6 @@
   "count": 38
  },
  "days": [
-  {
-   "date": "2025-10-19",
-   "count": 0,
-   "level": 0
-  },
-  {
-   "date": "2025-10-20",
-   "count": 0,
-   "level": 0
-  },
-  {
-   "date": "2025-10-21",
-   "count": 0,
-   "level": 0
-  },
-  {
-   "date": "2025-10-22",
-   "count": 0,
-   "level": 0
-  },
-  {
-   "date": "2025-10-23",
-   "count": 0,
-   "level": 0
-  },
-  {
-   "date": "2025-10-24",
-   "count": 1,
-   "level": 1
-  },
-  {
-   "date": "2025-10-25",
-   "count": 0,
-   "level": 0
-  },
   {
    "date": "2025-10-26",
    "count": 0,
@@ -1862,6 +1827,11 @@
   },
   {
    "date": "2026-10-24",
+   "count": 0,
+   "level": 0
+  },
+  {
+   "date": "2026-10-25",
    "count": 0,
    "level": 0
   }
