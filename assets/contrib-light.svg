@@ -368,6 +368,7 @@
 <rect class="cell l0" style="--d:56" x="826" y="117" width="12" height="12" rx="3"/>
 <rect class="cell l0" style="--d:57" x="826" y="132" width="12" height="12" rx="3"/>
 <rect class="cell l0" style="--d:52" x="841" y="42" width="12" height="12" rx="3"/>
+<rect class="cell l0" style="--d:53" x="841" y="57" width="12" height="12" rx="3"/>
 <g class="muted" font-size="12"><text x="711.4" y="182">Less</text><rect class="l0" x="746.2" y="172" width="12" height="12" rx="3"/><rect class="l1" x="761.2" y="172" width="12" height="12" rx="3"/><rect class="l2" x="776.2" y="172" width="12" height="12" rx="3"/><rect class="l3" x="791.2" y="172" width="12" height="12" rx="3"/><rect class="l4" x="806.2" y="172" width="12" height="12" rx="3"/><text x="824.2" y="182">More</text></g>
 <text class="total" x="61" y="183.5"><tspan class="num">178</tspan> contributions in the last year</text>
 </svg>
